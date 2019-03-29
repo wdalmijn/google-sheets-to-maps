@@ -3,6 +3,12 @@ const os = require('os');
 
 const { setupDatabase } = require('./db');
 const { preloadData } = require('./loadData');
+const {
+    ADDRESS_FIELD_NAME,
+    NAME_FIELD_NAME,
+    WEBSITE_FIELD_NAME,
+    MAPS_API_KEY,
+} = require('./datasources');
 
 function checkAndLoadDataIfNeeded(db, forceRefresh = false) {
     return new Promise((resolve, reject) => {
@@ -37,6 +43,18 @@ function server() {
             // render client
             app.get('/', function(req, res) {
                 return res.sendFile('public/index.html', { root: '../' })
+            });
+
+            // Returns client variables
+            app.get('/client_vars', function(req, res) {
+                return res.send({
+                    locationVars: {
+                        address: ADDRESS_FIELD_NAME,
+                        name: NAME_FIELD_NAME,
+                        website: WEBSITE_FIELD_NAME,
+                    },
+                    accessToken: MAPS_API_KEY,
+                });
             });
 
             // Return locations JSON
