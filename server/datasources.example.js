@@ -1,0 +1,17 @@
+const ADDRESS_FIELD_NAME = 'Address';
+const EXTERNAL_CSV_FILE = 'YOUR CSV LINK HERE';
+const TOMTOM_API_KEY = '';
+const TOMTOM_COUNTRY = 'DE';
+const TOMTOM_LAT = '52.5065117';
+const TOMTOM_LNG = '13.1438694';
+const MAPS_API_KEY = '';
+
+module.exports = {
+    ADDRESS_FIELD_NAME,
+    EXTERNAL_CSV_FILE,
+    TOMTOM_API_KEY,
+    TOMTOM_COUNTRY,
+    TOMTOM_LAT,
+    TOMTOM_LNG,
+    MAPS_API_KEY,
+};

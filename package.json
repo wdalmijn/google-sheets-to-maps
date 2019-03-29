@@ -1,0 +1,18 @@
+{
+  "name": "google-sheets-to-maps",
+  "version": "1.0.0",
+  "description": "Create OpenMaps with markers based on address",
+  "main": "client/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Win Dalmijn",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "csv-parse": "^4.3.4",
+    "express": "^4.16.4",
+    "nedb": "^1.8.0"
+  }
+}
