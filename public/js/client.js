@@ -1,7 +1,7 @@
 function client() {
     const berLatLng = [52.5109937,13.4111919];
     const berlinMap = L.map('main').setView(berLatLng, 11.5);
-    const accessToken = 'pk.eyJ1IjoibXZhYXJhIiwiYSI6ImNqdHNtN3RsdDB6N240NHIwazF5emRiZXMifQ.klkNAoDd-VHY1-010SPGcg';
+
     L.tileLayer(`https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${accessToken}`, {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,

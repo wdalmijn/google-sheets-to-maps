@@ -1,4 +1,6 @@
+const NAME_FIELD_NAME = 'Name';
 const ADDRESS_FIELD_NAME = 'Address';
+const WEBSITE_FIELD_NAME = 'Website';
 const EXTERNAL_CSV_FILE = 'YOUR CSV LINK HERE';
 const TOMTOM_API_KEY = '';
 const TOMTOM_COUNTRY = 'DE';
