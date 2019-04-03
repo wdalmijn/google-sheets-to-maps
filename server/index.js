@@ -1,5 +1,7 @@
 const express = require('express');
 const os = require('os');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const { setupDatabase } = require('./db');
 const { preloadData } = require('./loadData');
@@ -8,7 +10,7 @@ const {
     NAME_FIELD_NAME,
     WEBSITE_FIELD_NAME,
     MAPS_API_KEY,
-} = require('./datasources');
+} = process.env;
 
 function checkAndLoadDataIfNeeded(db, forceRefresh = false) {
     return new Promise((resolve, reject) => {

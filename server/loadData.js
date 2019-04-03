@@ -1,5 +1,7 @@
 const axios = require('axios');
 const parse = require('csv-parse')
+const dotenv = require('dotenv');
+dotenv.config();
 const {
     ADDRESS_FIELD_NAME,
     EXTERNAL_CSV_FILE,
@@ -7,7 +9,7 @@ const {
     TOMTOM_COUNTRY,
     TOMTOM_LAT,
     TOMTOM_LNG,
-} = require('./datasources');
+} = process.env;
 
 // Credits https://www.webdeveloper.com/d/77256-strip-double-quotes-of-beginning-and-end-of-string/2
 function unquoteString(string) {
@@ -48,7 +50,6 @@ function loadCSVfile() {
         .then((res) => {
             // In my case, the columns are located on the second line of the file
             // so I split the file per line and fetch the second line, and split by column
-            // const columns = res.data.split('\n')[1].split(',').map(str => unquoteString(str));
             const data = res.data.split('\n').slice(1).join('\n');
             return parseCSV(data);
         })
