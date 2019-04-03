@@ -86,4 +86,3 @@ typings/
 
 # Custom ignores
 dbData
-server/datasources.js

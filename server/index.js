@@ -9,7 +9,11 @@ const {
     ADDRESS_FIELD_NAME,
     NAME_FIELD_NAME,
     WEBSITE_FIELD_NAME,
+    LAT,
+    LON,
     MAPS_API_KEY,
+    MAPS_ZOOM_LEVEL,
+    PORT,
 } = process.env;
 
 function checkAndLoadDataIfNeeded(db, forceRefresh = false) {
@@ -37,7 +41,12 @@ function server() {
     const app = express();
     app.use(express.static('public'))
     
-    const port = 8080;
+    const port = PORT;
+
+    if (!MAPS_API_KEY) {
+        console.error('MAPS_API_KEY is not set, please check configuration file');
+        process.exit(1);
+    }
 
     return checkAndLoadDataIfNeeded(db)
         .then((docs) => {
@@ -54,6 +63,10 @@ function server() {
                         address: ADDRESS_FIELD_NAME,
                         name: NAME_FIELD_NAME,
                         website: WEBSITE_FIELD_NAME,
+                    },
+                    mapsVars: {
+                        latLng: [parseFloat(LAT), parseFloat(LON)],
+                        zoomLevel: parseFloat(MAPS_ZOOM_LEVEL),
                     },
                     accessToken: MAPS_API_KEY,
                 });

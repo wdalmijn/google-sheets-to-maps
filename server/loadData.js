@@ -6,9 +6,9 @@ const {
     ADDRESS_FIELD_NAME,
     EXTERNAL_CSV_FILE,
     TOMTOM_API_KEY,
-    TOMTOM_COUNTRY,
-    TOMTOM_LAT,
-    TOMTOM_LNG,
+    COUNTRY,
+    LAT,
+    LON,
 } = process.env;
 
 // Credits https://www.webdeveloper.com/d/77256-strip-double-quotes-of-beginning-and-end-of-string/2
@@ -58,6 +58,8 @@ function loadCSVfile() {
         })
 }
 
+// Additional override function for german addresses
+// to help tom tom find our locations
 function replaceAddressContent(address) {
     return address
         .toLowerCase()
@@ -74,7 +76,7 @@ function geoCodeAddresses(locationsData) {
             )
         );
         return {
-            query: `/geocode/${address}.json?countrySet=${TOMTOM_COUNTRY}&lat=${TOMTOM_LAT}&lon=${TOMTOM_LNG}`,
+            query: `/geocode/${address}.json?countrySet=${COUNTRY}&lat=${LAT}&lon=${LON}`,
         };
     });
 
@@ -107,6 +109,16 @@ function geoCodeAddresses(locationsData) {
 }
 
 function preloadData(db) {
+    if (!EXTERNAL_CSV_FILE) {
+        console.error('EXTERNAL_CSV_FILE is not set, please check configuration file');
+        process.exit(1);
+    }
+
+    if (!TOMTOM_API_KEY) {
+        console.error('TOMTOM_API_KEY is not set, please check configuration file');
+        process.exit(1);
+    }
+
     return loadCSVfile().then(locationsData => {
         return geoCodeAddresses(locationsData);
     })

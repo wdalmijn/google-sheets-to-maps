@@ -1,13 +1,14 @@
 function client() {
+    const mainMap = L.map('main');
     return axios.get('/client_vars')
         .then(res => res.data)
         .then(({
             accessToken,
             locationVars,
+            mapsVars,
         }) => {
-            const latLng = [52.5109937,13.4111919];
-            const zoomLevel = 11.5;
-            const map = L.map('main').setView(latLng, zoomLevel);
+            const { latLng, zoomLevel } = mapsVars;
+            mainMap.setView(latLng, zoomLevel);
 
 
             L.tileLayer(`https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${accessToken}`, {
@@ -15,7 +16,7 @@ function client() {
                 maxZoom: 18,
                 id: 'mapbox.streets',
                 accessToken
-            }).addTo(map);
+            }).addTo(mainMap);
 
         return axios.get('/locations')
             .then(res => ({
@@ -27,7 +28,7 @@ function client() {
             const { position } = loc;
             const { name, address, website } = vars;
             if (position && position.lat && position.lon) {
-                const marker =  L.marker([position.lat, position.lon]).addTo(map);
+                const marker =  L.marker([position.lat, position.lon]).addTo(mainMap);
                 const popupContent = `
                     <h2>${loc[name]}</h2>
                     <p>${loc[address].replace(',', '<br/>')}</p>
