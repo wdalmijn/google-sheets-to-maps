@@ -28,5 +28,6 @@ Example sheet:
 ## Links
 Getting a CSV link for Google Sheets:
 https://help.aftership.com/hc/en-us/articles/115008490908-CSV-Auto-Fetch-using-Google-Drive-Spreadsheet
+
 Leaflet.JS:
 https://leafletjs.com/
