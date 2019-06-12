@@ -21,7 +21,7 @@ const {
 function checkAndLoadDataIfNeeded(db, forceRefresh = false) {
     return new Promise((resolve, reject) => {
         db.count({ Naam: { $exists: true } }, function(err, count) {
-            if (!count) {
+            if (forceRefresh || !count) {
                 console.log('Preloading data...');
                 preloadData(db).then(() => {
                     resolve();

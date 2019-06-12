@@ -22,7 +22,7 @@ function client() {
             .then(res => ({
                 locations: res.data,
                 vars: locationVars,
-            }))
+            }));
     }).then(({locations, vars }) => {
         const markers = locations.map(loc => {
             const { position } = loc;
